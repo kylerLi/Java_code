@@ -1,0 +1,198 @@
+面向对象的设计原则：
+- 单一职责原则：一个类只做它该做的事情。
+	（单一职责原则想表达的就是”高内聚”，写代码最终极的原则只有六个字”高内聚、低耦合”，就如同葵花宝典或辟邪剑谱的中心思想就八个字”欲练此功必先自宫”，
+	所谓的高内聚就是一个代码模块只完成一项功能，在面向对象中，如果只让一个类完成它该做的事，而不涉及与它无关的领域就是践行了高内聚的原则，这个类就只有
+	单一职责。我们都知道一句话叫”因为专注，所以专业”，一个对象如果承担太多的职责，那么注定它什么都做不好。这个世界上任何好的东西都有两个特征，
+	一个是功能单一，好的相机绝对不是电视购物里面卖的那种一个机器有一百多种功能的，它基本上只能照相；另一个是模块化，好的自行车是组装车，从减震叉、
+	刹车到变速器，所有的部件都是可以拆卸和重新组装的，好的乒乓球拍也不是成品拍，一定是底板和胶皮可以拆分和自行组装的，一个好的软件系统，它里面的每个
+	功能模块也应该是可以轻易的拿到其他系统中使用的，这样才能实现软件复用的目标。）
+- 开闭原则：软件实体应当对扩展开放，对修改关闭。
+	（在理想的状态下，当我们需要为一个软件系统增加新功能时，只需要从原来的系统派生出一些新类就可以，不需要修改原来的任何一行代码。要做到开闭有两个要点：
+	①抽象是关键，一个系统中如果没有抽象类或接口系统就没有扩展点；
+	②封装可变性，将系统中的各种可变因素封装到一个继承结构中，如果多个可变因素混杂在一起，系统将变得复杂而换乱，如果不清楚如何封装可变性，可以参考《设计模式精解》一书中对桥梁模式的讲解的章节。）
+- 依赖倒转原则：面向接口编程。
+	（该原则说得直白和具体一些就是声明方法的参数类型、方法的返回类型、变量的引用类型时，尽可能使用抽象类型而不用具体类型，因为抽象类型可以被它的任何一个子类型所替代，请参考下面的里氏替换原则。）
+- 里氏替换原则：任何时候都可以用子类型替换掉父类型。
+	（关于里氏替换原则的描述，Barbara Liskov女士的描述比这个要复杂得多，但简单的说就是能用父类型的地方就一定能使用子类型。
+	里氏替换原则可以检查继承关系是否合理，如果一个继承关系违背了里氏替换原则，那么这个继承关系一定是错误的，需要对代码进行重构。
+	例如让猫继承狗，或者狗继承猫，又或者让正方形继承长方形都是错误的继承关系，因为你很容易找到违反里氏替换原则的场景。
+	需要注意的是：子类一定是增加父类的能力而不是减少父类的能力，因为子类比父类的能力更多，把能力多的对象当成能力少的对象来用当然没有任何问题。）
+- 接口隔离原则：接口要小而专，绝不能大而全。
+	（臃肿的接口是对接口的污染，既然接口表示能力，那么一个接口只应该描述一种能力，接口也应该是高度内聚的。
+	 例如，琴棋书画就应该分别设计为四个接口，而不应设计成一个接口中的四个方法，因为如果设计成一个接口中的四个方法，
+	 那么这个接口很难用，毕竟琴棋书画四样都精通的人还是少数，而如果设计成四个接口，会几项就实现几个接口，这样的话每个接口被复用的可能性是很高的。
+	 Java中的接口代表能力、代表约定、代表角色，能否正确的使用接口一定是编程水平高低的重要标识。）
+- 合成聚合复用原则：优先使用聚合或合成关系复用代码。
+	（通过继承来复用代码是面向对象程序设计中被滥用得最多的东西，因为所有的教科书都无一例外的对继承进行了鼓吹从而误导了初学者，类与类之间简单的说有三种关系，
+	Is-A关系、Has-A关系、Use-A关系，分别代表继承、关联和依赖。其中，关联关系根据其关联的强度又可以进一步划分为关联、聚合和合成，
+	但说白了都是Has-A关系，合成聚合复用原则想表达的是优先考虑Has-A关系而不是Is-A关系复用代码，原因嘛可以自己从百度上找到一万个理由，
+	需要说明的是，即使在Java的API中也有不少滥用继承的例子，例如Properties类继承了Hashtable类，Stack类继承了Vector类，
+	这些继承明显就是错误的，更好的做法是在Properties类中放置一个Hashtable类型的成员并且将其键和值都设置为字符串来存储数据，
+	而Stack类的设计也应该是在Stack类中放一个Vector对象来存储数据。记住：任何时候都不要继承工具类，工具是可以拥有并可以使用的，而不是拿来继承的。）
+- 迪米特法则：迪米特法则又叫最少知识原则，一个对象应当对其他对象有尽可能少的了解。
+	（迪米特法则简单的说就是如何做到”低耦合”，门面模式和调停者模式就是对迪米特法则的践行。对于门面模式可以举一个简单的例子，你去一家公司洽谈业务，
+	你不需要了解这个公司内部是如何运作的，你甚至可以对这个公司一无所知，去的时候只需要找到公司入口处的前台美女，告诉她们你要做什么，
+	她们会找到合适的人跟你接洽，前台的美女就是公司这个系统的门面。再复杂的系统都可以为用户提供一个简单的门面，
+	Java Web开发中作为前端控制器的Servlet或Filter不就是一个门面吗，浏览器对服务器的运作方式一无所知，
+	但是通过前端控制器就能够根据你的请求得到相应的服务。调停者模式也可以举一个简单的例子来说明，
+	例如一台计算机，CPU、内存、硬盘、显卡、声卡各种设备需要相互配合才能很好的工作，但是如果这些东西都直接连接到一起，计算机的布线将异常复杂，
+	在这种情况下，主板作为一个调停者的身份出现，它将各个设备连接在一起而不需要每个设备之间直接交换数据，这样就减小了系统的耦合度和复杂度，如下图所示。
+	迪米特法则用通俗的话来将就是不要和陌生人打交道，如果真的需要，找一个自己的朋友，让他替你和陌生人打交道。）
+
+JDK源码中的设计模式
+
+http://blog.csdn.net/lovelion/article/details/17517213    概要
+http://www.iteye.com/news/18725
+http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns    设计模式问答
+ 
+Structural（结构模式）
+	Adapter:
+		把一个接口或是类变成另外一种。
+		java.util.Arrays#asList()
+		javax.swing.JTable(TableModel)
+		java.io.InputStreamReader(InputStream)
+		java.io.OutputStreamWriter(OutputStream)
+		javax.xml.bind.annotation.adapters.XmlAdapter#marshal()
+		javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal()
+	Bridge:
+		把抽象和实现解藕，于是接口和实现可在完全独立开来。
+		AWT (提供了抽象层映射于实际的操作系统)
+		JDBC
+	Composite:
+		让使用者把单独的对象和组合对象混用。
+		javax.swing.JComponent#add(Component)
+		java.awt.Container#add(Component)
+		java.util.Map#putAll(Map)
+		java.util.List#addAll(Collection)
+		java.util.Set#addAll(Collection)
+ 
+	Decorator:
+		为一个对象动态的加上一系列的动作，而不需要因为这些动作的不同而产生大量的继承类。这个模式在JDK中几乎无处不在，所以，下面的列表只是一些典型的。
+		java.io.BufferedInputStream(InputStream)
+		java.io.DataInputStream(InputStream)
+		java.io.BufferedOutputStream(OutputStream)
+		java.util.zip.ZipOutputStream(OutputStream)
+		java.util.Collections#checked[List|Map|Set|SortedSet|SortedMap]()
+	Facade:
+		用一个简单的接口包状一组组件，接口，抽象或是子系统。
+		java.lang.Class
+		javax.faces.webapp.FacesServlet
+	Flyweight:
+		有效率地存储大量的小的对象。
+		java.lang.Integer#valueOf(int)
+		java.lang.Boolean#valueOf(boolean)
+		java.lang.Byte#valueOf(byte)
+		java.lang.Character#valueOf(char)
+	Proxy:
+		用一个简单的对象来代替一个复杂的对象。
+		java.lang.reflect.Proxy
+		RMI
+Creational（创建模式）
+	Abstract factory:
+		创建一组有关联的对象实例。这个模式在JDK中也是相当的常见，还有很多的framework例如Spring。我们很容易找到这样的实例。
+		java.util.Calendar#getInstance()
+		java.util.Arrays#asList()
+		java.util.ResourceBundle#getBundle()
+		java.sql.DriverManager#getConnection()
+		java.sql.Connection#createStatement()
+		java.sql.Statement#executeQuery()
+		java.text.NumberFormat#getInstance()
+		javax.xml.transform.TransformerFactory#newInstance()
+	Builder:
+		主要用来简化一个复杂的对象的创建。这个模式也可以用来实现一个 Fluent Interface。
+		java.lang.StringBuilder#append()
+		java.lang.StringBuffer#append()
+		java.sql.PreparedStatement
+		javax.swing.GroupLayout.Group#addComponent()
+	Factory:
+		简单来说，按照需求返回一个类型的实例。
+		java.lang.Proxy#newProxyInstance()
+		java.lang.Object#toString()
+		java.lang.Class#newInstance()
+		java.lang.reflect.Array#newInstance()
+		java.lang.reflect.Constructor#newInstance()
+		java.lang.Boolean#valueOf(String)
+		java.lang.Class#forName()
+	Prototype:
+		使用自己的实例创建另一个实例。有时候，创建一个实例然后再把已有实例的值拷贝过去，是一个很复杂的动作。所以，使用这个模式可以避免这样的复杂性。
+		java.lang.Object#clone()
+		java.lang.Cloneable
+	Singleton:
+		只允许一个实例。在 Effective Java中建议使用Emun.
+		java.lang.Runtime#getRuntime()
+		java.awt.Toolkit#getDefaultToolkit()
+		java.awt.GraphicsEnvironment#getLocalGraphicsEnvironment()
+		java.awt.Desktop#getDesktop()
+Behavioral(行为模式)
+	Chain of responsibility:
+		把一个对象在一个链接传递直到被处理。在这个链上的所有的对象有相同的接口（抽象类）但却有不同的实现。
+		java.util.logging.Logger#log()
+		javax.servlet.Filter#doFilter()
+	Command:
+		把一个或一些命令封装到一个对象中。
+		java.lang.Runnable
+		javax.swing.Action
+	Interpreter:
+		一个语法解释器的模式。
+		java.util.Pattern
+		java.text.Normalizer
+		java.text.Format
+	Iterator:
+		提供一种一致的方法来顺序遍历一个容器中的所有元素。
+		java.util.Iterator
+		java.util.Enumeration
+	Mediator:
+		用来减少对象单的直接通讯的依赖关系。使用一个中间类来管理消息的方向。
+		java.util.Timer
+		java.util.concurrent.Executor#execute()
+		java.util.concurrent.ExecutorService#submit()
+		java.lang.reflect.Method#invoke()
+	Memento:
+		给一个对象的状态做一个快照。Date类在内部使用了一个long型来做这个快照。
+		java.util.Date
+		java.io.Serializable
+	Null Object:
+		这个模式用来解决如果一个Collection中没有元素的情况。
+		java.util.Collections#emptyList()
+		java.util.Collections#emptyMap()
+		java.util.Collections#emptySet()
+	Observer:
+		允许一个对象向所有的侦听的对象广播自己的消息或事件。
+		java.util.EventListener
+		javax.servlet.http.HttpSessionBindingListener
+		javax.servlet.http.HttpSessionAttributeListener
+		javax.faces.event.PhaseListener
+	State:
+		这个模式允许你可以在运行时很容易地根据自身内部的状态改变对象的行为。
+		java.util.Iterator
+		javax.faces.lifecycle.LifeCycle#execute()
+	Strategy:
+		定义一组算法，并把其封装到一个对象中。然后在运行时，可以灵活的使用其中的一个算法。
+		java.util.Comparator#compare()
+		javax.servlet.http.HttpServlet
+		javax.servlet.Filter#doFilter()
+	Template method:
+		允许子类重载部分父类而不需要完全重写。
+		java.util.Collections#sort()
+		java.io.InputStream#skip()
+		java.io.InputStream#read()
+		java.util.AbstractList#indexOf()
+	Visitor:
+		作用于某个对象群中各个对象的操作. 它可以使你在不改变这些对象本身的情况下,定义作用于这些对象的新操作.
+		javax.lang.model.element.Element 和javax.lang.model.element.ElementVisitor
+		javax.lang.model.type.TypeMirror 和javax.lang.model.type.TypeVisitor
+		
+		
+		
+	软件设计中最常用的有
+	
+	单例模式           Singleton Pattern
+	简单工厂模式   Simple Factory Pattern
+	 工厂方法模式  Factory Method Pattern
+	抽象工厂模式   Abstract  Factory Pattern
+	适配器模式      Adapter Pattern
+	外观模式         Façade  Pattern
+	代理模式         Proxy  Pattern
+	策略模式         Strategy  Pattern
+
+
