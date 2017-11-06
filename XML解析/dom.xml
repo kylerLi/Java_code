@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persons>
+	<!-- <person id="100">
+		<property name="hello"></property>
+        <property age="20" ></property>
+	</person>
+	<person id="101">
+		<property name="tree"></property>
+        <property age="25" ></property>
+	</person> -->
+	
+	<person id="100">
+        <name value="hihi">hello</name>
+        <age>20</age>
+    </person>
+    <person id="101">
+        <name value="hha">Mr. tree</name>
+        <age>19</age>
+    </person> 
+</persons>
