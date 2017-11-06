@@ -59,7 +59,7 @@ public class SAXParseService {
 	  |--通过SAX解析工厂得到解析器对象
       	|--SAXParser sp = spf.newSAXParser();
       |--通过解析器对象解析xml文件
-      	|--sp.parse("book.xml“,new XMLContentHandler());
+      	|--sp.parse("sax.xml“,new XMLContentHandler());
       	|--这里的XMLContentHandler 继承 DefaultHandler
       		|--在startElement() endElement() 获得 开始和结束元素名称
       		|--在characters() 获得读取到文本内容
